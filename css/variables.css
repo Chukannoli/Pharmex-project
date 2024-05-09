@@ -1,0 +1,15 @@
+:root {
+
+/* Colors */
+	--color-primary: #000;
+	--color-secondary: #fff;
+	--color-accent: #ff0000;
+	--color-accent-1: #439775;
+	--color-accent-2: #2A4747;
+	--color-accent-3: #F1F7F5; 
+
+/* Font size */
+	--font-size-base: 16px;
+	--font-size-m: 1rem;
+	--font-size-l: 3rem;
+}
