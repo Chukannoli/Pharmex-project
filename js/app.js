@@ -1,6 +1,5 @@
 // form element
 const formElement = document.querySelector(".app__form");
-
 // input elements
 const productNameInput = document.getElementById("product-name");
 const manufacturerInput = document.getElementById("manufacturer");
@@ -15,7 +14,9 @@ const quantityError = document.querySelector(".quantity-error");
 const typeError = document.querySelector(".type-error");
 // button
 const registerButton = document.querySelector(".add-button");
-let allMedicine = JSON.parse(localStorage.getItem("All medicine")) || [];
+let allMedicine = JSON.parse(localStorage.getItem("allMedicine")) || [];
+// list element
+const dataList = document.querySelector(".app__list-data");
 
 // Medicine class
 class Medicine {
@@ -114,5 +115,52 @@ registerButton.addEventListener("click", (e) => {
     return;
   }
   formElement.reset();
+  List.renderList();
   console.log(allMedicine);
 });
+
+class List {
+  static renderList() {
+    dataList.textContent = "";
+    allMedicine.forEach((medicine) => {
+      // creating rows
+      const medicineRow = document.createElement("tr");
+      const productIDData = document.createElement("td");
+      const productNameData = document.createElement("td");
+      const manufacturerData = document.createElement("td");
+      const typeData = document.createElement("td");
+      const expirationDateData = document.createElement("td");
+      const quantityData = document.createElement("td");
+      const deleteButtonContainer = document.createElement("td");
+      const deleteButton = document.createElement("button");
+
+      // appending elements
+      dataList.append(medicineRow);
+      medicineRow.append(
+        productIDData,
+        productNameData,
+        manufacturerData,
+        typeData,
+        expirationDateData,
+        quantityData,
+        deleteButtonContainer
+      );
+      deleteButtonContainer.append(deleteButton);
+
+      // adding content
+      productIDData.textContent = medicine.productID;
+      productNameData.textContent = medicine.productName;
+      manufacturerData.textContent = medicine.manufacturer;
+      typeData.textContent = medicine.type;
+      expirationDateData.textContent = medicine.expirationDate;
+      quantityData.textContent = medicine.quantity;
+      deleteButton.textContent = "x";
+
+      // adding style
+      medicineRow.classList.add("app__list-data-row");
+      deleteButton.classList.add("row-delete-button");
+    });
+  }
+}
+console.log(allMedicine);
+List.renderList();
