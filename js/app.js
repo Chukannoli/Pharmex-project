@@ -1,3 +1,6 @@
+// form element
+const formElement = document.querySelector(".app__form");
+
 // input elements
 const productNameInput = document.getElementById("product-name");
 const manufacturerInput = document.getElementById("manufacturer");
@@ -13,8 +16,6 @@ const typeError = document.querySelector(".type-error");
 // button
 const registerButton = document.querySelector(".add-button");
 let allMedicine = JSON.parse(localStorage.getItem("All medicine")) || [];
-
-console.log(allMedicine);
 
 // Medicine class
 class Medicine {
@@ -101,3 +102,17 @@ class Topical extends Medicine {
     return newTopical;
   }
 }
+registerButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (typeInput.value === "tablet") {
+    allMedicine.push(Tablet.createTablet());
+    localStorage.setItem("allMedicine", JSON.stringify(allMedicine));
+  } else if (typeInput.value === "topical") {
+    allMedicine.push(Topical.createTopical());
+    localStorage.setItem("allMedicine", JSON.stringify(allMedicine));
+  } else {
+    return;
+  }
+  formElement.reset();
+  console.log(allMedicine);
+});
