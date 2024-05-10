@@ -148,6 +148,7 @@ class List {
       deleteButtonContainer.append(deleteButton);
 
       // adding content
+      medicineRow.id = medicine.productID;
       productIDData.textContent = medicine.productID;
       productNameData.textContent = medicine.productName;
       manufacturerData.textContent = medicine.manufacturer;
@@ -159,8 +160,25 @@ class List {
       // adding style
       medicineRow.classList.add("app__list-data-row");
       deleteButton.classList.add("row-delete-button");
+
+      // deleting row
+      deleteButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        const rowToDelete = e.currentTarget.parentElement.parentElement.id;
+        const index = allMedicine.findIndex(
+          (medicine) => medicine.productID == rowToDelete
+        );
+        if (index > -1) {
+          if (medicine.quantity > 1) {
+            medicine.quantity--;
+          } else {
+            allMedicine.splice(index, 1);
+          }
+        }
+        List.renderList();
+        localStorage.setItem("allMedicine", JSON.stringify(allMedicine));
+      });
     });
   }
 }
-console.log(allMedicine);
 List.renderList();
