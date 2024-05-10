@@ -15,3 +15,89 @@ const registerButton = document.querySelector(".add-button");
 let allMedicine = JSON.parse(localStorage.getItem("All medicine")) || [];
 
 console.log(allMedicine);
+
+// Medicine class
+class Medicine {
+  constructor(
+    productName,
+    manufacturer,
+    type,
+    expirationDate,
+    quantity,
+    productID
+  ) {
+    this.productName = productName;
+    this.manufacturer = manufacturer;
+    this.type = type;
+    this.expirationDate = expirationDate;
+    this.quantity = quantity;
+    this.productID = productID;
+  }
+  static createMedicine() {
+    const newMedicine = new Medicine(
+      productNameInput.value,
+      manufacturerInput.value,
+      typeInput.value,
+      expirationDateInput.value,
+      quantityInput.value,
+      Date.now()
+    );
+    return newMedicine;
+  }
+}
+
+class Tablet extends Medicine {
+  constructor(
+    productName,
+    manufacturer,
+    type,
+    expirationDate,
+    quantity,
+    productID,
+    gram
+  ) {
+    super(productName, manufacturer, type, expirationDate, quantity, productID);
+    this.gram = gram;
+  }
+  static createTablet() {
+    const newTablet = new Tablet(
+      productNameInput.value,
+      manufacturerInput.value,
+      typeInput.value,
+      expirationDateInput.value,
+      quantityInput.value,
+      Date.now(),
+      ""
+    );
+    console.log("Tablet added");
+    return newTablet;
+  }
+}
+
+class Topical extends Medicine {
+  constructor(
+    productName,
+    manufacturer,
+    type,
+    expirationDate,
+    quantity,
+    productID,
+    ml
+  ) {
+    super(productName, manufacturer, type, expirationDate, quantity, productID);
+    this.ml = ml;
+  }
+  static createTopical() {
+    const newTopical = new Topical(
+      productNameInput.value,
+      manufacturerInput.value,
+      typeInput.value,
+      expirationDateInput.value,
+      quantityInput.value,
+      Date.now(),
+      ""
+    );
+    console.log("Topical added");
+    return newTopical;
+  }
+}
