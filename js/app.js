@@ -1,3 +1,4 @@
+import FormValidation from "./formValidation.js";
 // form element
 const formElement = document.querySelector(".app__form");
 // input elements
@@ -103,12 +104,26 @@ class Topical extends Medicine {
     return newTopical;
   }
 }
+
 registerButton.addEventListener("click", (e) => {
   e.preventDefault();
-  if (typeInput.value === "tablet") {
+  const { formErrorStatus } = FormValidation.handleValidation(
+    productNameInput.value,
+    manufacturerInput.value,
+    typeInput.value,
+    expirationDateInput.value,
+    quantityInput.value,
+    productNameError,
+    manufacturerError,
+    typeError,
+    expirationDateError,
+    quantityError
+  );
+
+  if (formErrorStatus() === false && typeInput.value === "tablet") {
     allMedicine.push(Tablet.createTablet());
     localStorage.setItem("allMedicine", JSON.stringify(allMedicine));
-  } else if (typeInput.value === "topical") {
+  } else if (formErrorStatus() === false && typeInput.value === "topical") {
     allMedicine.push(Topical.createTopical());
     localStorage.setItem("allMedicine", JSON.stringify(allMedicine));
   } else {
