@@ -142,6 +142,9 @@ export default class FormValidation {
       quantityError.textContent = errors.quantityErrorMessage;
     }
 
-    console.log(errors.errorStatus);
+    const formErrorStatus = () => {
+      return errors.errorStatus;
+    };
+    return { formErrorStatus };
   }
 }
